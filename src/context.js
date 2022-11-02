@@ -36,7 +36,16 @@ const AppProvider=({children})=>{
       dispatch({type:'GET_TOTALS'})
    },[state.cart])
 
-   
+   const fetchData=async ()=>{
+      dispatch({type:'LOADING'})
+      const resp=await fetch(url)
+      const cart=resp.json();
+      dispatch({type:'DISPLAY_ITEMS',payload:cart})
+   }
+
+   useEffect(()=>{
+      fetchData();
+   },[])
 
    return (
       <AppContext.Provider

@@ -6,13 +6,13 @@ const reducer=(state,action)=>{
    if(action.type==='REMOVE'){
       return {
          ...state,
-         cart:state.cart.filter(cartItem=>cartItem.id!==action.payload)
+         cart:state.cart.filter(cartItem=>cartItem.id!==action.action.payload)
       }
    }
 
    if(action.type==='INCREASE'){
       const tempCart=state.cart.map(cartItem=>{
-         if(cartItem.id===payload){
+         if(cartItem.id===action.payload){
             return {
                cartItem,
                amount:cartItem.amount+1,
@@ -26,7 +26,7 @@ const reducer=(state,action)=>{
 
    if(action.type==='DECREASE'){
       const tempCart=state.cart.map(cartItem=>{
-         if(cartItem.id===payload){
+         if(cartItem.id===action.payload){
             return {
                ...cartItem,
                amount:cartItem.amount-1,
@@ -51,6 +51,17 @@ const reducer=(state,action)=>{
       })
       total=parseFloat(total,toFixed(2));
       return {...state,total,amount}
+   }
+
+   if(action.type==='LOADING'){
+      return {...state,loading:true,}
+   }
+
+   if(action.type==='DISPLAY_ITEMS'){
+      return {
+         ...state,
+         cart:action.payload.cart
+      }
    }
 
    return state;

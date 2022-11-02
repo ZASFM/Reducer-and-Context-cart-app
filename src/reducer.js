@@ -64,6 +64,21 @@ const reducer=(state,action)=>{
       }
    }
 
+   if(action.type==='TOGGLE'){
+      const tempCart=state.cart.map(cartItem=>{
+         if(cartItem.id===action.payload.id){
+            if(action.payload.type==='increase'){
+               return {...cartItem,amount:cartItem.amount+1}
+            }
+            if(action.payload.type==='increase'){
+               return {...cartItem,amount:cartItem.amount-1}
+            }
+         }
+         return cartItem;
+      }).filter(cartItem=>cartItem.amount!==0)
+      return {...state,cart:tempCart}
+   }
+
    return state;
 }
 

@@ -47,6 +47,10 @@ const AppProvider=({children})=>{
       fetchData();
    },[])
 
+   const toggleAmount=(id,type)=>{
+      dispatch({type:'TOGGLE',payload:{id,type}})
+   }
+
    return (
       <AppContext.Provider
          value={{
@@ -55,6 +59,7 @@ const AppProvider=({children})=>{
             remove,
             increase,
             decrease,
+            toggleAmount,
          }}
       >
          {children}
